@@ -1,14 +1,15 @@
 # BER Schema Mapper
 
-A standalone workshop page for placing classes from BER LinkML schemas onto
-shared process abstractions (the BASALT lanes).
+A standalone workshop page for mapping classes from BER LinkML schemas onto
+high-level grouping classes.
 
 Open [`index.html`](index.html) in any browser (`file://` works). No server, no
 build step, no JavaScript dependencies.
 
 Source classes come from the [BRIDGE research dumps](https://github.com/sierra-moxon/bridge-research)
-(NMDC, LAMBDA-BER, KBase CDM, BASIN-3D, BERtron, MIAPPE, …). Drop targets are
-BASALT’s process lanes, matching the
+(NMDC, LAMBDA-BER, KBase CDM, BASIN-3D, BERtron, MIAPPE, …). You map each source
+class onto a grouping class. The built-in grouping classes follow BASALT’s process
+flow, in the same order as the
 [schema explorer](https://emsl-computing.github.io/BASALT-Schema/files/schema-explorer.html):
 
 1. Sampling activity
@@ -24,15 +25,25 @@ plus **site-specific metadata**, **sample metadata**, and **other / doesn’t fi
 ## How to map
 
 1. Pick a source schema in the left rail.
-2. Drag a class onto a lane, or click the class then click the lane.
-3. Open **BASALT classes** inside a lane and drop onto a specific class for a tighter match.
+2. Drag a class onto a grouping class, or click the class and then click the grouping class.
+3. Open **BASALT classes** inside a grouping class and drop onto a specific class for a tighter mapping.
 
-Mappings persist in this browser (`localStorage`) until you **Export JSON** or
+Mappings stay in this browser (`localStorage`) until you **Export JSON** or
 **Export CSV**. Import brings a previous export back.
 
 **Deep-link:** `index.html#s=nmdc` opens with that source schema selected.
+`index.html#page=groups` opens the grouping-class editor.
 
-Keyboard: `1`–`9`/`0` place the selected class on a lane; `/` focuses search; `Esc` clears selection.
+Keyboard: `1`–`9` and `0` place the selected class on the original ten grouping classes; `/` focuses search; `Esc` clears the selection.
+
+## Grouping classes
+
+Open **Abstractions** to rename a grouping class or create a new one. A new grouping
+class is another column you can map onto. It has no BASALT subclasses of its own.
+
+Built-in ids stay fixed, so a renamed grouping class keeps the mappings already
+saved in this browser. Export JSON includes the grouping classes, and Import
+restores them.
 
 ## Updating the catalog
 
