@@ -28,8 +28,10 @@ plus **site-specific metadata**, **sample metadata**, and **other / doesn’t fi
 2. Drag a class onto a grouping class, or click the class and then click the grouping class.
 3. Open **BASALT classes** inside a grouping class and drop onto a specific class for a tighter mapping.
 
-Mappings stay in this browser (`localStorage`) until you **Export JSON** or
-**Export CSV**. Import brings a previous export back.
+On your own, mappings and grouping classes stay in this browser (`localStorage`).
+**Export JSON** and **Export CSV** each contain both the mappings and the grouping
+classes, from the mapper or from Abstractions. **Import** reads either file and
+restores both.
 
 **Deep-link:** `index.html#s=nmdc` opens with that source schema selected.
 `index.html#page=groups` opens the grouping-class editor.
@@ -38,12 +40,31 @@ Keyboard: `1`–`9` and `0` place the selected class on the original ten groupin
 
 ## Grouping classes
 
-Open **Abstractions** to rename a grouping class or create a new one. A new grouping
-class is another column you can map onto. It has no BASALT subclasses of its own.
+Open **Abstractions** to rename a grouping class or create a new one. An added
+grouping class is its own column, marked **Added**, in the color and section you
+choose. It has no BASALT subclasses of its own.
 
 Built-in ids stay fixed, so a renamed grouping class keeps the mappings already
-saved in this browser. Export JSON includes the grouping classes, and Import
-restores them.
+saved. The same Export and Import actions are on this page and on the mapper.
+
+## Collaborate
+
+A shared session lets a group edit the same grouping classes and mappings. Each
+change is saved and pushed to everyone who has the session open.
+
+```bash
+python3 serve.py
+```
+
+Open the address it prints (others on the same network can use the network
+address). **Share** stays disabled until that server is running. Then enter
+your name and **Start a shared session**. Copy the link, or give them the code
+to join.
+
+Leave the session when you want a private copy again. The shared copy stays on
+the machine running `serve.py`, under `.data/rooms/`, and is still there after
+a restart. Opening `index.html` as a file keeps working for one person; sharing
+needs the server.
 
 ## Updating the catalog
 

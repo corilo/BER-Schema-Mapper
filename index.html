@@ -106,6 +106,22 @@
   .col{background:var(--panel); border:1px solid var(--border); border-radius:12px; box-shadow:var(--shadow);
     display:flex; flex-direction:column; min-height:240px; max-height:min(42vh,380px); overflow:hidden;
     transition:border-color .12s, box-shadow .12s, background .12s;}
+  .col.added{
+    border-color:color-mix(in srgb, var(--colc) 55%, var(--border));
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--colc) 22%, var(--panel)) 0, var(--panel) 84px);
+    box-shadow:inset 4px 0 0 var(--colc), var(--shadow);
+  }
+  .col.added .drop-hint{
+    border-color:color-mix(in srgb, var(--colc) 55%, var(--border));
+    background:color-mix(in srgb, var(--colc) 10%, transparent);
+    color:var(--muted);
+  }
+  .added-mark{
+    font:700 8px var(--mono); letter-spacing:.6px; text-transform:uppercase; color:#06101f;
+    background:var(--colc, var(--cardc, var(--accent))); border-radius:999px; padding:2px 6px; flex:none;
+  }
+  .legend .added-leg i{outline:1px dashed color-mix(in srgb, var(--text) 45%, transparent); outline-offset:2px;}
   .col.over{border-color:var(--colc,var(--accent)); box-shadow:0 0 0 1px var(--colc,var(--accent)), var(--shadow);
     background:color-mix(in srgb, var(--colc,var(--accent)) 10%, var(--panel));}
   .col.hint{border-color:color-mix(in srgb, var(--colc) 55%, var(--border));}
@@ -197,6 +213,7 @@
   .groups-head{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:18px;}
   .groups-head h2{margin:0 0 6px; font-size:18px; letter-spacing:.2px;}
   .groups-intro{margin:0; color:var(--muted); font-size:13px; line-height:1.55; max-width:62ch;}
+  .io-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
   .add-form,.gcard{background:var(--panel); border:1px solid var(--border); border-radius:12px; box-shadow:var(--shadow);}
   .add-form{border-style:dashed; padding:14px; margin-bottom:22px;}
   .add-form h3,.band-block h3{font:600 10px var(--mono); letter-spacing:1px; text-transform:uppercase; color:var(--faint); margin:0 0 8px;}
@@ -225,6 +242,54 @@
   .gmeta select:focus{border-color:var(--accent);}
   .gid{font:500 10.5px var(--mono); color:var(--faint); text-align:right;}
   .kind{font:600 9px var(--mono); letter-spacing:.4px; text-transform:uppercase; color:var(--muted);}
+  .gcard.added{
+    display:flex; flex-direction:column; gap:0; padding:0; overflow:hidden;
+    border-color:color-mix(in srgb, var(--cardc, var(--accent)) 55%, var(--border));
+    background:linear-gradient(180deg, color-mix(in srgb, var(--cardc, var(--accent)) 16%, var(--panel)) 0, var(--panel) 72px);
+  }
+  .gaccent{height:5px; background:var(--cardc, var(--accent));}
+  .gadded-top{display:flex; align-items:center; gap:8px; padding:12px 14px 0; flex-wrap:wrap;}
+  .gadded-top .spacer{flex:1; min-width:8px;}
+  .gcard.added .gfields{padding:10px 14px 0;}
+  .gcard.added .gid{text-align:left;}
+  .gadded-foot{
+    display:flex; flex-wrap:wrap; gap:14px 28px; align-items:flex-end;
+    margin-top:12px; padding:12px 14px; border-top:1px solid var(--border-soft);
+  }
+  .seg{display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;}
+  .seg button{
+    appearance:none; cursor:pointer; background:var(--panel-2); color:var(--muted);
+    border:1px solid var(--border); border-radius:999px; padding:5px 10px; font:600 11.5px var(--sans);
+  }
+  .seg button.on{background:var(--cardc, var(--accent)); color:#06101f; border-color:transparent;}
+  .seg button:hover:not(.on){color:var(--text); border-color:var(--cardc, var(--accent));}
+
+  .share{position:relative; flex:none;}
+  .share-btn{display:inline-flex; align-items:center; gap:6px;}
+  .share-btn:disabled{opacity:.4; cursor:not-allowed;}
+  .live-dot{width:8px; height:8px; border-radius:50%; background:var(--faint); display:inline-block;}
+  .share.live .live-dot{background:#4ade80; box-shadow:0 0 0 3px color-mix(in srgb, #4ade80 25%, transparent);}
+  .share-pop{
+    position:absolute; right:0; top:calc(100% + 8px); width:min(340px, 80vw); z-index:40;
+    background:var(--panel); border:1px solid var(--border); border-radius:12px;
+    box-shadow:var(--shadow); padding:12px 14px; display:flex; flex-direction:column; gap:8px;
+  }
+  .share-pop p{margin:0; color:var(--muted); font-size:12.5px; line-height:1.45;}
+  .share-pop label{display:flex; flex-direction:column; gap:4px; font:600 10px var(--mono);
+    letter-spacing:.5px; text-transform:uppercase; color:var(--faint);}
+  .share-pop input{
+    width:100%; background:var(--panel-2); border:1px solid var(--border); color:var(--text);
+    border-radius:8px; padding:7px 9px; font:500 13px var(--sans); letter-spacing:0; text-transform:none; outline:none;
+  }
+  .share-pop input:focus{border-color:var(--accent);}
+  .share-row{display:flex; gap:8px; align-items:center;}
+  .share-row input{flex:1; min-width:0;}
+  .people{display:flex; flex-wrap:wrap; gap:6px;}
+  .person{display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--text);
+    background:var(--panel-2); border:1px solid var(--border); border-radius:999px; padding:2px 8px 2px 2px;}
+  .avatar{width:22px; height:22px; border-radius:50%; display:grid; place-items:center;
+    font:700 10px var(--sans); color:#06101f; background:var(--accent);}
+  .share-status{font-size:12.5px; color:var(--muted); line-height:1.4;}
 
   @media (max-width: 1100px){
     main{grid-template-columns:260px 1fr;}
@@ -244,6 +309,7 @@
     .add-form,.gcard,.gfields,.add-grid{min-width:0; max-width:100%;}
     .gid{text-align:left;}
     .groups-head{flex-direction:column;}
+    .share-pop{position:fixed; left:12px; right:12px; top:auto; bottom:12px; width:auto;}
   }
 </style>
 </head>
@@ -260,10 +326,30 @@
       <button type="button" id="navGroups">Abstractions</button>
     </nav>
     <div class="spacer"></div>
+    <div class="share" id="share">
+      <button type="button" class="text-btn share-btn" id="shareBtn" disabled title="Sharing needs python3 serve.py"><span class="live-dot"></span><span id="shareLabel">Share</span></button>
+      <div class="share-pop" id="sharePop" hidden>
+        <p id="shareHelp">Start a session, then send the link. Everyone in it shares grouping classes and mappings. Changes are saved and show up as they happen.</p>
+        <label>Your name<input id="shareName" maxlength="40" autocomplete="nickname" placeholder="Ada" /></label>
+        <div class="share-status" id="shareStatus">Only on this browser so far.</div>
+        <div class="people" id="sharePeople"></div>
+        <button type="button" class="text-btn" id="shareStart">Start a shared session</button>
+        <label>Join with a code
+          <span class="share-row"><input id="shareCode" maxlength="12" autocapitalize="off" spellcheck="false" placeholder="k7mq3p" /><button type="button" class="text-btn" id="shareJoin">Join</button></span>
+        </label>
+        <div id="shareLive" hidden>
+          <label>Session link<input id="shareUrl" readonly /></label>
+          <div class="share-row">
+            <button type="button" class="text-btn" id="shareCopy">Copy link</button>
+            <button type="button" class="text-btn danger" id="shareLeave">Leave session</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="progress map-only" id="progress">—</div>
-    <button class="text-btn" id="exportJson" title="Download mappings as JSON">Export JSON</button>
-    <button class="text-btn" id="exportCsv" title="Download mappings as CSV">Export CSV</button>
-    <label class="text-btn file-btn" title="Import a previously exported JSON">Import<input type="file" id="importFile" accept="application/json,.json" /></label>
+    <button class="text-btn" id="exportJson" title="Download mappings and grouping classes as JSON">Export JSON</button>
+    <button class="text-btn" id="exportCsv" title="Download mappings and grouping classes as CSV">Export CSV</button>
+    <label class="text-btn file-btn" title="Import mappings and grouping classes from JSON or CSV">Import<input type="file" id="importFile" accept="application/json,.json,text/csv,.csv" /></label>
     <button class="text-btn danger map-only" id="clearSchema" title="Clear mappings for the current schema">Clear schema</button>
     <button class="icon-btn" id="theme" title="Light / dark">◐</button>
   </header>
@@ -307,7 +393,8 @@
           <li>Open <b>BASALT classes</b> inside a grouping class and drop onto a specific class for a tighter mapping.</li>
           <li>Click a class, then click a grouping class. That works on trackpads and phones.</li>
           <li>Mappings stay in this browser until you export them.</li>
-          <li>Open <b>Abstractions</b> to rename a grouping class or create a new one.</li>
+          <li>Open <b>Abstractions</b> to rename a grouping class or create a new one. Added grouping classes are marked and use the color you pick.</li>
+          <li><b>Share</b> starts a live session. People who join see the same grouping classes and mappings, and each change shows up as it happens.</li>
         </ul>
       </div>
       <div class="dcontent" id="dcontent">
@@ -331,7 +418,12 @@
       <div class="groups-head">
         <div>
           <h2>Grouping classes</h2>
-          <p class="groups-intro">These are the high-level grouping classes you map schema classes onto. Rename one, or create a new one. Built-in ids stay fixed, so mappings already saved in this browser keep working. Changes stay in this browser and are included in Export JSON.</p>
+          <p class="groups-intro">These are the high-level grouping classes you map schema classes onto. Rename one, or create a new one. Built-in ids stay fixed, so mappings already saved in this browser keep working.</p>
+          <div class="io-row">
+            <button type="button" class="text-btn" id="exportJsonGroups">Export JSON</button>
+            <button type="button" class="text-btn" id="exportCsvGroups">Export CSV</button>
+            <button type="button" class="text-btn" id="importGroups">Import</button>
+          </div>
         </div>
         <button type="button" class="text-btn" id="resetNames">Restore built-in names</button>
       </div>
@@ -457,10 +549,34 @@ function rebuildGroups(){
   FLOW_TAIL = tail;
   META = meta;
 }
-function persistGroups(){
+const shareTimers = {};
+let sharePaused = false;
+function persistGroups(shareKey){
   try { localStorage.setItem(GROUP_STORE_KEY, JSON.stringify(groupStore)); }
   catch { /* storage unavailable */ }
   rebuildGroups();
+  if (!shareKey || sharePaused) return;
+  const delay = shareKey.startsWith("override:") || shareKey.startsWith("upsert:") ? 150 : 0;
+  clearTimeout(shareTimers[shareKey]);
+  shareTimers[shareKey] = setTimeout(() => {
+    const op = shareOpFor(shareKey);
+    if (op) shareOp(op);
+  }, delay);
+}
+function shareOpFor(key){
+  if (key.startsWith("override:")) {
+    const id = key.slice("override:".length);
+    const o = groupStore.overrides[id];
+    return {type:"override", id, override: o ? {label:o.label, short:o.short, desc:o.desc} : null};
+  }
+  if (key.startsWith("upsert:")) {
+    const id = key.slice("upsert:".length);
+    const g = groupStore.custom.find(c => c.id === id);
+    return g ? {type:"upsert", group:{id:g.id, label:g.label, short:g.short, desc:g.desc, color:g.color, band:g.band}} : null;
+  }
+  if (key.startsWith("delete:")) return {type:"delete-group", id: key.slice("delete:".length)};
+  if (key === "overrides") return {type:"overrides", overrides: JSON.parse(JSON.stringify(groupStore.overrides))};
+  return null;
 }
 function isDirty(id){
   const o = groupStore.overrides[id];
@@ -480,7 +596,7 @@ function commitBuiltin(id, field, raw){
   cur[field] = value;
   if (cur.label === d.label && cur.short === d.short && cur.desc === d.desc) delete groupStore.overrides[id];
   else groupStore.overrides[id] = {label:cur.label, short:cur.short, desc:cur.desc};
-  persistGroups();
+  persistGroups("override:" + id);
 }
 function commitCustom(id, field, raw){
   const c = groupStore.custom.find(x => x.id === id);
@@ -493,7 +609,7 @@ function commitCustom(id, field, raw){
     if (!value) return false;
     c[field] = value;
   }
-  persistGroups();
+  persistGroups("upsert:" + id);
   return true;
 }
 function mappingCount(bucketId){
@@ -547,8 +663,90 @@ function bindGroupText(input, commit){
   input.addEventListener("input", () => commit(input.value, false));
   input.addEventListener("change", () => commit(input.value, true));
 }
+function addedCard(id){
+  const meta = lane(id);
+  const card = el("div", "gcard added");
+  card.dataset.id = id;
+  card.style.setProperty("--cardc", color(meta.color));
+  card.appendChild(el("div", "gaccent"));
+  const top = el("div", "gadded-top");
+  const mark = el("span", "added-mark");
+  mark.textContent = "Added";
+  top.appendChild(mark);
+  const idLine = el("span", "gid");
+  idLine.textContent = id;
+  idLine.title = "Stable id. Mappings keep using it when the name changes.";
+  top.appendChild(idLine);
+  const nMaps = mappingCount(id);
+  const count = el("span", "gid");
+  count.textContent = nMaps === 1 ? "1 mapping" : nMaps + " mappings";
+  top.appendChild(count);
+  top.appendChild(el("span", "spacer"));
+  const del = document.createElement("button");
+  del.type = "button"; del.className = "text-btn danger";
+  del.dataset.action = "delete"; del.dataset.id = id; del.textContent = "Delete";
+  del.addEventListener("click", () => deleteCustom(id));
+  top.appendChild(del);
+  card.appendChild(top);
+  const fields = el("div", "gfields");
+  const name = document.createElement("input");
+  name.type = "text"; name.maxLength = 80; name.value = meta.label;
+  name.dataset.id = id; name.dataset.field = "label"; name.autocomplete = "off";
+  const short = document.createElement("input");
+  short.type = "text"; short.maxLength = 24; short.value = meta.short;
+  short.dataset.id = id; short.dataset.field = "short"; short.autocomplete = "off";
+  const desc = document.createElement("textarea");
+  desc.maxLength = 400; desc.value = meta.desc || "";
+  desc.dataset.id = id; desc.dataset.field = "desc";
+  fields.appendChild(fieldLabel("Name", name));
+  fields.appendChild(fieldLabel("Short name", short));
+  fields.appendChild(fieldLabel("Description", desc));
+  const wire = (input, field) => {
+    bindGroupText(input, (value, isChange) => {
+      if (!isChange && field !== "desc" && !String(value).trim()) return;
+      const ok = commitCustom(id, field, value);
+      if (isChange && !ok) input.value = lane(id)[field];
+    });
+  };
+  wire(name, "label"); wire(short, "short"); wire(desc, "desc");
+  card.appendChild(fields);
+  const foot = el("div", "gadded-foot");
+  const place = el("div", "");
+  const placeLab = el("div", "kind");
+  placeLab.textContent = "Appears in";
+  place.appendChild(placeLab);
+  const seg = el("div", "seg");
+  BANDS.forEach(b => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = b.title;
+    if (b.id === meta.band) btn.classList.add("on");
+    btn.addEventListener("click", () => {
+      commitCustom(id, "band", b.id);
+      seg.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === btn));
+      const dest = document.getElementById("band-" + b.id);
+      if (dest && card.parentElement !== dest) dest.appendChild(card);
+    });
+    seg.appendChild(btn);
+  });
+  place.appendChild(seg);
+  foot.appendChild(place);
+  const colorBox = el("div", "");
+  const colorLab = el("div", "kind");
+  colorLab.textContent = "Color";
+  colorBox.appendChild(colorLab);
+  colorBox.appendChild(makeSwatches(meta.color, (c, btn, wrap) => {
+    commitCustom(id, "color", c);
+    card.style.setProperty("--cardc", color(c));
+    wrap.querySelectorAll(".swatch").forEach(s => s.classList.toggle("on", s === btn));
+  }));
+  foot.appendChild(colorBox);
+  card.appendChild(foot);
+  return card;
+}
 function groupCard(id){
   const meta = lane(id);
+  if (!meta.builtin) return addedCard(id);
   const card = el("div", "gcard");
   card.dataset.id = id;
   const bar = el("div", "gbar");
@@ -588,7 +786,7 @@ function groupCard(id){
   card.appendChild(fields);
   const side = el("div", "gmeta");
   const kind = el("div", "kind");
-  kind.textContent = meta.builtin ? "Built-in" : "Custom";
+  kind.textContent = "Built-in";
   side.appendChild(kind);
   const idLine = el("div", "gid");
   idLine.textContent = id;
@@ -598,45 +796,18 @@ function groupCard(id){
   const nMaps = mappingCount(id);
   count.textContent = nMaps === 1 ? "1 mapping" : nMaps + " mappings";
   side.appendChild(count);
-  if (!meta.builtin) {
-    const bandSel = document.createElement("select");
-    bandSel.setAttribute("aria-label", "Where it appears");
-    BANDS.forEach(b => {
-      const o = document.createElement("option");
-      o.value = b.id; o.textContent = b.title;
-      if (b.id === meta.band) o.selected = true;
-      bandSel.appendChild(o);
-    });
-    bandSel.addEventListener("change", () => {
-      commitCustom(id, "band", bandSel.value);
-      const dest = $("#band-" + lane(id).band);
-      if (dest) dest.appendChild(card);
-    });
-    side.appendChild(bandSel);
-    side.appendChild(makeSwatches(meta.color, (c, btn, wrap) => {
-      commitCustom(id, "color", c);
-      bar.style.background = color(lane(id).color);
-      wrap.querySelectorAll(".swatch").forEach(s => s.classList.toggle("on", s === btn));
-    }));
-    const del = document.createElement("button");
-    del.type = "button"; del.className = "text-btn danger";
-    del.dataset.action = "delete"; del.dataset.id = id; del.textContent = "Delete";
-    del.addEventListener("click", () => deleteCustom(id));
-    side.appendChild(del);
-  } else {
-    const reset = document.createElement("button");
-    reset.type = "button"; reset.className = "text-btn"; reset.dataset.action = "reset";
-    reset.textContent = "Reset"; reset.hidden = !isDirty(id);
-    reset.addEventListener("click", () => {
-      delete groupStore.overrides[id];
-      persistGroups();
-      const fresh = lane(id);
-      name.value = fresh.label; short.value = fresh.short; desc.value = fresh.desc || "";
-      reset.hidden = true;
-      toast("Name restored");
-    });
-    side.appendChild(reset);
-  }
+  const reset = document.createElement("button");
+  reset.type = "button"; reset.className = "text-btn"; reset.dataset.action = "reset";
+  reset.textContent = "Reset"; reset.hidden = !isDirty(id);
+  reset.addEventListener("click", () => {
+    delete groupStore.overrides[id];
+    persistGroups("override:" + id);
+    const fresh = lane(id);
+    name.value = fresh.label; short.value = fresh.short; desc.value = fresh.desc || "";
+    reset.hidden = true;
+    toast("Name restored");
+  });
+  side.appendChild(reset);
   card.appendChild(side);
   return card;
 }
@@ -702,7 +873,7 @@ function createGroup(){
   const colorName = PALETTE.includes(pendingColor) ? pendingColor : "datagen";
   const id = slugify(label);
   groupStore.custom.push({id, label, short, desc, color:colorName, band});
-  persistGroups();
+  persistGroups("upsert:" + id);
   renderGroupEditor();
   const card = document.querySelector('.gcard[data-id="' + id + '"]');
   if (card) { card.classList.add("flash"); card.scrollIntoView({block:"center"}); }
@@ -728,8 +899,9 @@ function deleteCustom(id){
     });
     saveMappings();
   }
+  clearTimeout(shareTimers["upsert:" + id]);
   groupStore.custom = groupStore.custom.filter(x => x.id !== id);
-  persistGroups();
+  persistGroups("delete:" + id);
   renderGroupEditor();
   toast("Deleted " + c.label);
 }
@@ -780,13 +952,22 @@ function getMap(schema, name){
 }
 function setMap(schema, name, bucket, target, notes){
   const sm = schemaMaps(schema);
-  sm[name] = {bucket, target: target || null, notes: notes || (sm[name] && sm[name].notes) || "", ts: Date.now()};
+  const prev = sm[name];
+  const entry = {
+    bucket,
+    target: target || null,
+    notes: notes != null ? notes : ((prev && prev.notes) || ""),
+    ts: Date.now(),
+  };
+  sm[name] = entry;
   saveMappings();
+  shareOp({type:"map", schema, class: name, bucket: entry.bucket, target: entry.target, notes: entry.notes, ts: entry.ts});
 }
 function clearMap(schema, name){
   const sm = mappings[schema];
   if (sm) delete sm[name];
   saveMappings();
+  shareOp({type:"unmap", schema, class: name});
 }
 
 function srcClass(schema, name){
@@ -885,7 +1066,7 @@ function buildLegend(){
   const lg = $("#legend"); lg.innerHTML = "";
   [...FLOW, ...FLOW_TAIL, ...META].forEach(k => {
     const b = lane(k);
-    lg.appendChild(el("span","l", `<i style="background:${color(b.color)}"></i>${esc(b.short)}`));
+    lg.appendChild(el("span", "l" + (b.builtin ? "" : " added-leg"), `<i style="background:${color(b.color)}"></i>${esc(b.short)}`));
   });
   lg.appendChild(el("span","note","Drop onto a grouping class, or open BASALT classes and drop onto a specific class."));
 }
@@ -907,12 +1088,15 @@ function basaltTree(bucket){
 function buildColumn(bucket){
   const meta = lane(bucket);
   const colc = color(meta.color);
-  const col = el("div","col");
+  const col = el("div", "col" + (meta.builtin ? "" : " added"));
   col.dataset.bucket = bucket;
   col.style.setProperty("--colc", colc);
   const mapsHere = mappedIn(bucket);
   const h = el("div","col-h");
-  h.innerHTML = `<div class="cn"><span class="bar" style="background:${colc}"></span>${esc(meta.label)}${meta.builtin ? "" : `<span class="pill">custom</span>`}</div>`
+  const mark = meta.builtin
+    ? `<span class="bar" style="background:${colc}"></span>`
+    : `<span class="added-mark">Added</span>`;
+  h.innerHTML = `<div class="cn">${mark}${esc(meta.label)}</div>`
     + (meta.desc ? `<div class="cd">${esc(meta.desc)}</div>` : "");
   h.appendChild(el("div","cc", String(mapsHere.length)));
   h.addEventListener("click", () => { if (selected) assignSelected(bucket, null); });
@@ -953,7 +1137,7 @@ function buildColumn(bucket){
   if (mapsHere.length){
     mapsHere.forEach(item => body.appendChild(makeChip(item, bucket, colc)));
   } else {
-    body.appendChild(el("div","drop-hint","Drop a class here"));
+    body.appendChild(el("div","drop-hint", meta.builtin ? "Drop a class here" : "Drop a source class onto this grouping class"));
   }
   col.appendChild(body);
   col.addEventListener("dragover", onDragOver);
@@ -1135,9 +1319,9 @@ function renderSrcDetail(schema, name){
     assign(schema, name, m.bucket, $("#mapTarget").value || null);
   });
   $("#mapNotes").addEventListener("change", () => {
-    if (!getMap(schema, name)) return;
-    schemaMaps(schema)[name].notes = $("#mapNotes").value;
-    saveMappings();
+    const cur = getMap(schema, name);
+    if (!cur) return;
+    setMap(schema, name, cur.bucket, cur.target, $("#mapNotes").value);
   });
   $("#mapApply").addEventListener("click", () => {
     const b = $("#mapBucket").value || (m && m.bucket) || hint;
@@ -1188,6 +1372,7 @@ function allMappingRows(){
   Object.keys(mappings).forEach(schema => {
     Object.keys(mappings[schema] || {}).forEach(name => {
       const m = mappings[schema][name];
+      if (!m) return;
       rows.push({
         source_schema: schema,
         source_schema_title: (SCHEMAS[schema] && SCHEMAS[schema].title) || schema,
@@ -1202,6 +1387,183 @@ function allMappingRows(){
   rows.sort((a,b) => a.source_schema.localeCompare(b.source_schema) || a.source_class.localeCompare(b.source_class));
   return rows;
 }
+function groupingClassRows(){
+  const rows = [];
+  Object.keys(DEFAULT_BUCKETS).forEach(id => {
+    const b = lane(id);
+    rows.push({id, label:b.label, short:b.short, description:b.desc || "", color:b.color, band:b.band, builtin:true});
+  });
+  groupStore.custom.forEach(c => {
+    rows.push({id:c.id, label:c.label, short:c.short, description:c.desc || "", color:c.color, band:c.band, builtin:false});
+  });
+  return rows;
+}
+function buildExportPayload(){
+  return {
+    version: 2,
+    exported_at: new Date().toISOString(),
+    groups: groupStore,
+    grouping_classes: groupingClassRows(),
+    mappings: allMappingRows(),
+  };
+}
+function csvEscape(value){
+  return `"${String(value ?? "").replace(/"/g, '""')}"`;
+}
+function buildCsv(){
+  const groupHeader = ["record","id","label","short","description","color","band"];
+  const mapHeader = ["record","source_schema","source_schema_title","source_class","bucket","bucket_label","target_class","notes"];
+  const lines = [groupHeader.map(csvEscape).join(",")];
+  groupingClassRows().forEach(c => {
+    lines.push(["grouping_class", c.id, c.label, c.short, c.description, c.color, c.band].map(csvEscape).join(","));
+  });
+  lines.push(mapHeader.map(csvEscape).join(","));
+  allMappingRows().forEach(r => {
+    lines.push(["mapping", r.source_schema, r.source_schema_title, r.source_class, r.bucket, r.bucket_label, r.target_class, r.notes].map(csvEscape).join(","));
+  });
+  return lines.join("\n");
+}
+function parseCsv(text){
+  const rows = [];
+  let row = [], cur = "", quoted = false;
+  const src = String(text || "").replace(/^\uFEFF/, "");
+  for (let i = 0; i < src.length; i++) {
+    const ch = src[i];
+    if (quoted) {
+      if (ch === '"') {
+        if (src[i + 1] === '"') { cur += '"'; i++; }
+        else quoted = false;
+      } else cur += ch;
+    } else if (ch === '"') quoted = true;
+    else if (ch === ",") { row.push(cur); cur = ""; }
+    else if (ch === "\n") { row.push(cur); rows.push(row); row = []; cur = ""; }
+    else if (ch !== "\r") cur += ch;
+  }
+  if (cur.length || row.length) { row.push(cur); rows.push(row); }
+  return rows.filter(cells => cells.some(cell => String(cell).trim() !== ""));
+}
+function csvToImportData(text){
+  const table = parseCsv(text);
+  const grouping_classes = [];
+  const mappings = [];
+  let mode = "";
+  let sawGroups = false;
+  table.forEach(cells => {
+    const head = (cells[0] || "").trim().toLowerCase();
+    const second = (cells[1] || "").trim().toLowerCase();
+    if (head === "record" && second === "id") { mode = "group"; sawGroups = true; return; }
+    if (head === "record" && second === "source_schema") { mode = "map"; return; }
+    if (head === "source_schema") { mode = "legacy"; return; }
+    if (mode === "group") {
+      grouping_classes.push({
+        id: cells[1], label: cells[2], short: cells[3], description: cells[4], color: cells[5], band: cells[6],
+      });
+    } else if (mode === "map") {
+      mappings.push({
+        source_schema: cells[1], source_schema_title: cells[2], source_class: cells[3],
+        bucket: cells[4], bucket_label: cells[5], target_class: cells[6], notes: cells[7] || "",
+      });
+    } else if (mode === "legacy") {
+      mappings.push({
+        source_schema: cells[0], source_schema_title: cells[1], source_class: cells[2],
+        bucket: cells[3], bucket_label: cells[4], target_class: cells[5], notes: cells[6] || "",
+      });
+    }
+  });
+  const data = {};
+  if (sawGroups) data.grouping_classes = grouping_classes;
+  if (mode === "map" || mode === "legacy" || mappings.length) data.mappings = mappings;
+  return data;
+}
+function groupsFromClassRows(list){
+  const overrides = {};
+  const custom = [];
+  list.forEach(item => {
+    if (!item || typeof item !== "object") return;
+    const id = String(item.id || "").trim();
+    if (!id) return;
+    const label = String(item.label || "").trim();
+    const short = String(item.short || "").trim();
+    const hasDesc = item.description != null || item.desc != null;
+    const desc = hasDesc ? String(item.description != null ? item.description : item.desc) : "";
+    if (DEFAULT_BUCKETS[id]) {
+      const d = DEFAULT_BUCKETS[id];
+      const next = {label: label || d.label, short: short || d.short, desc: hasDesc ? desc : d.desc};
+      if (next.label !== d.label || next.short !== d.short || next.desc !== d.desc) overrides[id] = next;
+    } else if (label) {
+      custom.push({
+        id, label, short: short || label.slice(0, 24), desc,
+        color: item.color || "datagen", band: item.band || "meta",
+      });
+    }
+  });
+  return sanitizeGroupStore({overrides, custom});
+}
+function mappingRowsFrom(data){
+  if (Array.isArray(data)) return data;
+  if (!data || typeof data !== "object" || !("mappings" in data)) return null;
+  if (Array.isArray(data.mappings)) return data.mappings;
+  if (!data.mappings || typeof data.mappings !== "object") return [];
+  const rows = [];
+  Object.keys(data.mappings).forEach(schema => {
+    const sm = data.mappings[schema];
+    if (!sm || typeof sm !== "object" || Array.isArray(sm)) return;
+    Object.keys(sm).forEach(name => {
+      const m = sm[name];
+      if (!m || typeof m !== "object") return;
+      rows.push({
+        source_schema: schema, source_class: name, bucket: m.bucket,
+        target_class: m.target || m.target_class || "", notes: m.notes || "",
+      });
+    });
+  });
+  return rows;
+}
+function applyImportData(data){
+  let didGroups = false, didMaps = false, skipped = 0, mapCount = 0;
+  sharePaused = true;
+  try {
+    if (data && data.groups && typeof data.groups === "object" && !Array.isArray(data.groups)) {
+      groupStore = sanitizeGroupStore(data.groups);
+      persistGroups();
+      didGroups = true;
+    } else if (data && Array.isArray(data.grouping_classes)) {
+      groupStore = groupsFromClassRows(data.grouping_classes);
+      persistGroups();
+      didGroups = true;
+    }
+    const rows = mappingRowsFrom(data);
+    if (rows) {
+      const next = {};
+      rows.forEach(r => {
+        if (!r || !r.source_schema || !r.source_class || !r.bucket) return;
+        if (!BUCKETS[r.bucket]) { skipped++; return; }
+        const sm = next[r.source_schema] || (next[r.source_schema] = {});
+        sm[r.source_class] = {
+          bucket: r.bucket,
+          target: r.target_class || r.target || null,
+          notes: r.notes || "",
+          ts: Date.now(),
+        };
+      });
+      mappings = next;
+      saveMappings();
+      didMaps = true;
+      mapCount = Object.keys(next).reduce((n, schema) => n + Object.keys(next[schema]).length, 0);
+    }
+  } finally { sharePaused = false; }
+  if (collab.code) shareOp({type:"snapshot", groups: groupStore, mappings});
+  refresh();
+  if ($("#groupEditor")) renderGroupEditor();
+  if (selected) showDetail();
+  const classCount = Object.keys(DEFAULT_BUCKETS).length + groupStore.custom.length;
+  let msg = "Nothing to import";
+  if (didGroups && didMaps) msg = `Imported ${mapCount} mappings and ${classCount} grouping classes`;
+  else if (didGroups) msg = `Imported ${classCount} grouping classes`;
+  else if (didMaps) msg = `Imported ${mapCount} mappings`;
+  if (skipped) msg += `. Skipped ${skipped} with an unknown grouping class`;
+  return {didGroups, didMaps, mapCount, skipped, msg};
+}
 function download(filename, text, type){
   const blob = new Blob([text], {type});
   const a = document.createElement("a");
@@ -1210,43 +1572,40 @@ function download(filename, text, type){
   a.click();
   URL.revokeObjectURL(a.href);
 }
-$("#exportJson").addEventListener("click", () => {
-  const payload = {version:2, exported_at: new Date().toISOString(), groups: groupStore, mappings: allMappingRows()};
-  download("ber-schema-mappings.json", JSON.stringify(payload, null, 2), "application/json");
-  toast(`Exported ${payload.mappings.length} mappings`);
-});
-$("#exportCsv").addEventListener("click", () => {
-  const rows = allMappingRows();
-  const cols = ["source_schema","source_schema_title","source_class","bucket","bucket_label","target_class","notes"];
-  const lines = [cols.join(",")].concat(rows.map(r => cols.map(c => `"${String(r[c]??"").replace(/"/g,'""')}"`).join(",")));
-  download("ber-schema-mappings.csv", lines.join("\n"), "text/csv");
-  toast(`Exported ${rows.length} mappings`);
-});
+function exportWorkshop(kind){
+  const maps = allMappingRows().length;
+  const classes = groupingClassRows().length;
+  if (kind === "csv") {
+    download("ber-schema-mapper.csv", buildCsv(), "text/csv");
+  } else {
+    download("ber-schema-mapper.json", JSON.stringify(buildExportPayload(), null, 2), "application/json");
+  }
+  toast(`Exported ${maps} mappings and ${classes} grouping classes`);
+}
+function importText(text, filename){
+  const name = String(filename || "").toLowerCase();
+  let data;
+  const trimmed = String(text || "").replace(/^\uFEFF/, "").trim();
+  try {
+    if (name.endsWith(".csv") || (!name.endsWith(".json") && trimmed && trimmed[0] !== "{" && trimmed[0] !== "[")) {
+      data = csvToImportData(text);
+    } else data = JSON.parse(trimmed);
+  } catch (err) {
+    toast("Could not read that file");
+    return;
+  }
+  const result = applyImportData(data);
+  toast(result.msg);
+}
+$("#exportJson").addEventListener("click", () => exportWorkshop("json"));
+$("#exportCsv").addEventListener("click", () => exportWorkshop("csv"));
+$("#exportJsonGroups").addEventListener("click", () => exportWorkshop("json"));
+$("#exportCsvGroups").addEventListener("click", () => exportWorkshop("csv"));
+$("#importGroups").addEventListener("click", () => $("#importFile").click());
 $("#importFile").addEventListener("change", e => {
   const f = e.target.files && e.target.files[0]; if (!f) return;
   const reader = new FileReader();
-  reader.onload = () => {
-    try {
-      const data = JSON.parse(reader.result);
-      const hasGroups = data && data.groups && typeof data.groups === "object";
-      if (hasGroups) {
-        groupStore = sanitizeGroupStore(data.groups);
-        persistGroups();
-      }
-      const rows = Array.isArray(data) ? data : (data.mappings || []);
-      let n = 0;
-      rows.forEach(r => {
-        if (!r.source_schema || !r.source_class || !r.bucket) return;
-        if (!BUCKETS[r.bucket]) return;
-        setMap(r.source_schema, r.source_class, r.bucket, r.target_class || null, r.notes || "");
-        n++;
-      });
-      refresh();
-      if (document.body.dataset.page === "groups") renderGroupEditor();
-      showDetail();
-      toast(hasGroups ? `Imported ${n} mappings and grouping classes` : `Imported ${n} mappings`);
-    } catch (err) { toast("Could not parse JSON"); }
-  };
+  reader.onload = () => importText(reader.result, f.name);
   reader.readAsText(f);
   e.target.value = "";
 });
@@ -1257,6 +1616,7 @@ $("#clearSchema").addEventListener("click", () => {
   if (!confirm(`Clear ${n} mapping${n===1?"":"s"} for ${SCHEMAS[currentSchema].short}?`)) return;
   mappings[currentSchema] = {};
   saveMappings();
+  shareOp({type:"clear-schema", schema: currentSchema});
   selected = null;
   refresh(); showDetail();
   toast("Cleared");
@@ -1292,12 +1652,16 @@ $("#resetNames").addEventListener("click", () => {
   if (!Object.keys(groupStore.overrides).length) { toast("Built-in names already match the defaults"); return; }
   if (!confirm("Restore the original names of the built-in grouping classes?")) return;
   groupStore.overrides = {};
-  persistGroups();
+  persistGroups("overrides");
   if (document.body.dataset.page === "groups") renderGroupEditor();
   else refresh();
   toast("Built-in names restored");
 });
 document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && $("#sharePop") && !$("#sharePop").hidden) {
+    $("#sharePop").hidden = true;
+    return;
+  }
   const onGroups = document.body.dataset.page === "groups";
   if (!onGroups && e.key === "/" && document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "TEXTAREA") {
     e.preventDefault(); $("#search").focus();
@@ -1312,7 +1676,313 @@ document.addEventListener("keydown", e => {
   if (keys[e.key] && selected && selected.kind === "src" && BUCKETS[keys[e.key]]) assignSelected(keys[e.key], null);
 });
 
+const COLLAB_PORT = 8731;
+const NAME_KEY = "ber-schema-mapper-name";
+const collab = {code:null, rev:0, es:null, people:[], server:false, client:clientToken()};
+function clientToken(){
+  try {
+    let id = sessionStorage.getItem("ber-client");
+    if (!id) { id = Math.random().toString(36).slice(2, 10); sessionStorage.setItem("ber-client", id); }
+    return id;
+  } catch { return Math.random().toString(36).slice(2, 10); }
+}
+function apiBase(){
+  return location.protocol === "file:" ? "http://127.0.0.1:" + COLLAB_PORT : "";
+}
+function shareName(){
+  const typed = $("#shareName") ? $("#shareName").value.trim() : "";
+  return typed || localStorage.getItem(NAME_KEY) || "";
+}
+function shareOp(op){
+  if (sharePaused || !collab.code || !op) return;
+  const code = collab.code;
+  fetch(apiBase() + "/api/rooms/" + encodeURIComponent(code) + "/ops", {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({client: collab.client, op}),
+  }).then(async res => {
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      toast(err.error || "Could not share that change");
+      return;
+    }
+    const data = await res.json().catch(() => ({}));
+    if (collab.code === code && data.rev) collab.rev = data.rev;
+  }).catch(() => toast("Could not reach the shared session"));
+}
+function applyServerState(state){
+  sharePaused = true;
+  try {
+    groupStore = sanitizeGroupStore(state.groups || {});
+    mappings = state.mappings && typeof state.mappings === "object" ? state.mappings : {};
+    persistGroups();
+    saveMappings();
+    collab.rev = state.rev || 0;
+    if (state.code) collab.code = state.code;
+  } finally { sharePaused = false; }
+  rerenderLive();
+}
+function applyRemoteOp(op){
+  sharePaused = true;
+  try {
+    if (!op || !op.type) return;
+    if (op.type === "map") setMap(op.schema, op.class, op.bucket, op.target || null, op.notes || "");
+    else if (op.type === "unmap") clearMap(op.schema, op.class);
+    else if (op.type === "clear-schema" && op.schema) {
+      mappings[op.schema] = {};
+      saveMappings();
+    } else if (op.type === "override" && op.id) {
+      if (op.override) groupStore.overrides[op.id] = op.override;
+      else delete groupStore.overrides[op.id];
+      groupStore = sanitizeGroupStore(groupStore);
+      persistGroups();
+    } else if (op.type === "overrides") {
+      groupStore.overrides = op.overrides || {};
+      groupStore = sanitizeGroupStore(groupStore);
+      persistGroups();
+    } else if (op.type === "upsert" && op.group) {
+      const i = groupStore.custom.findIndex(c => c.id === op.group.id);
+      if (i >= 0) groupStore.custom[i] = op.group;
+      else groupStore.custom.push(op.group);
+      groupStore = sanitizeGroupStore(groupStore);
+      persistGroups();
+    } else if (op.type === "delete-group" && op.id) {
+      Object.keys(mappings).forEach(schema => {
+        Object.keys(mappings[schema] || {}).forEach(name => {
+          if (mappings[schema][name].bucket === op.id) {
+            mappings[schema][name].bucket = "other";
+            mappings[schema][name].target = null;
+          }
+        });
+      });
+      groupStore.custom = groupStore.custom.filter(c => c.id !== op.id);
+      groupStore = sanitizeGroupStore(groupStore);
+      saveMappings();
+      persistGroups();
+    } else if (op.type === "snapshot") {
+      groupStore = sanitizeGroupStore(op.groups || {});
+      mappings = op.mappings && typeof op.mappings === "object" ? op.mappings : {};
+      persistGroups();
+      saveMappings();
+    }
+  } finally { sharePaused = false; }
+  rerenderLive();
+}
+function rerenderLive(){
+  const active = document.activeElement;
+  const typingNew = !!(active && active.closest && active.closest("form.add-form"));
+  const draft = typingNew ? {
+    name: $("#newName").value, short: $("#newShort").value, desc: $("#newDesc").value,
+    band: $("#newBand").value, color: pendingColor, start: active.selectionStart, id: active.id,
+  } : null;
+  const fieldId = active && active.dataset ? active.dataset.id : "";
+  const field = active && active.dataset ? active.dataset.field : "";
+  const caret = active ? active.selectionStart : null;
+  const editingDetail = !!(active && active.closest && active.closest(".dcontent"));
+  if (document.body.dataset.page === "groups") {
+    renderGroupEditor();
+    if (draft && $("#newName")) {
+      $("#newName").value = draft.name; $("#newShort").value = draft.short;
+      $("#newDesc").value = draft.desc; $("#newBand").value = draft.band;
+      pendingColor = draft.color;
+      const again = draft.id ? document.getElementById(draft.id) : null;
+      if (again) {
+        again.focus();
+        if (draft.start != null && again.setSelectionRange) { try { again.setSelectionRange(draft.start, draft.start); } catch (e) {} }
+      }
+    } else if (fieldId && field) {
+      const again = document.querySelector('#groupEditor [data-id="' + fieldId + '"][data-field="' + field + '"]');
+      if (again) {
+        again.focus();
+        if (caret != null && again.setSelectionRange) { try { again.setSelectionRange(caret, caret); } catch (e) {} }
+      }
+    }
+  } else {
+    refresh();
+    if (selected && !editingDetail) showDetail();
+  }
+  renderShare();
+}
+function renderPeople(list){
+  const box = $("#sharePeople");
+  if (!box) return;
+  box.innerHTML = "";
+  (list || []).forEach(p => {
+    const row = el("span", "person");
+    const av = el("span", "avatar");
+    av.textContent = (p.name || "?").trim().charAt(0).toUpperCase() || "?";
+    row.appendChild(av);
+    row.appendChild(document.createTextNode(p.client === collab.client ? (p.name + " (you)") : p.name));
+    box.appendChild(row);
+  });
+}
+function renderShare(){
+  const root = $("#share");
+  if (!root) return;
+  const on = !!collab.server;
+  const live = on && !!collab.code;
+  const btn = $("#shareBtn");
+  btn.disabled = !on;
+  btn.title = on ? "Work on this together" : "Sharing needs python3 serve.py";
+  root.classList.toggle("live", live);
+  root.classList.toggle("offline", !on);
+  $("#shareLabel").textContent = live ? (collab.code + (collab.people.length ? " · " + collab.people.length : "")) : "Share";
+  $("#shareStatus").textContent = live
+    ? "Live. Changes on this session are saved and show up for everyone here."
+    : "Only on this browser so far.";
+  $("#shareStart").hidden = live;
+  $("#shareLive").hidden = !live;
+  const joinLabel = $("#shareCode") && $("#shareCode").closest("label");
+  if (joinLabel) joinLabel.hidden = live;
+  if (live) $("#shareUrl").value = location.origin + location.pathname + "#room=" + collab.code;
+  renderPeople(collab.people);
+}
+async function checkServer(){
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 1200);
+  try {
+    const res = await fetch(apiBase() + "/api/health", {signal: ctrl.signal, cache: "no-store"});
+    const data = await res.json().catch(() => ({}));
+    return !!(res.ok && data && data.ok === true);
+  } catch { return false; }
+  finally { clearTimeout(timer); }
+}
+function watchServer(){
+  const tick = async () => {
+    const was = !!collab.server;
+    const ok = await checkServer();
+    collab.server = ok;
+    if (!ok) {
+      if ($("#sharePop")) $("#sharePop").hidden = true;
+      if (collab.es) { collab.es.close(); collab.es = null; }
+      collab.code = null;
+      collab.rev = 0;
+      collab.people = [];
+    }
+    renderShare();
+    if (ok && !was && !collab.code) {
+      const room = location.hash.match(/(?:^|&)room=([a-z0-9]{4,12})(?:&|$)/i);
+      if (room) joinRoom(room[1].toLowerCase(), true);
+    }
+    setTimeout(tick, ok ? 12000 : 4000);
+  };
+  tick();
+}
+function connectEvents(code){
+  if (collab.es) { collab.es.close(); collab.es = null; }
+  const name = encodeURIComponent(shareName() || "Someone");
+  const es = new EventSource(apiBase() + "/api/rooms/" + encodeURIComponent(code) + "/events?client=" + encodeURIComponent(collab.client) + "&name=" + name);
+  collab.es = es;
+  es.onmessage = ev => {
+    let msg;
+    try { msg = JSON.parse(ev.data); } catch { return; }
+    if (msg.people) collab.people = msg.people;
+    if (msg.kind === "presence") { renderShare(); return; }
+    if (msg.kind === "state") {
+      if (msg.rev < collab.rev) return;
+      applyServerState(msg);
+      renderShare();
+      return;
+    }
+    if (msg.kind === "op") {
+      if (msg.rev) collab.rev = msg.rev;
+      renderShare();
+      if (msg.client === collab.client) return;
+      applyRemoteOp(msg.op || {});
+    }
+  };
+  es.onerror = () => {
+    if (collab.code) $("#shareStatus").textContent = "Reconnecting to the shared session…";
+  };
+}
+async function startRoom(){
+  if (!collab.server) return;
+  try {
+    const res = await fetch(apiBase() + "/api/rooms", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({groups: groupStore, mappings, name: shareName()}),
+    });
+    if (!res.ok) throw new Error("start");
+    const state = await res.json();
+    collab.code = state.code;
+    collab.rev = state.rev || 0;
+    setHashRoom(state.code);
+    connectEvents(state.code);
+    renderShare();
+    toast("Session " + state.code + " is live");
+  } catch (err) {
+    toast(location.protocol === "file:" ? "Run python3 serve.py and open the address it prints" : "Could not start a session");
+  }
+}
+async function joinRoom(code, fromLink){
+  if (!collab.server) return;
+  code = String(code || "").trim().toLowerCase();
+  if (!/^[a-z0-9]{4,12}$/.test(code)) { toast("Enter the session code"); return; }
+  if (!fromLink && collab.code !== code && !confirm("Join " + code + "? The shared session replaces the grouping classes and mappings on this browser.")) return;
+  try {
+    const res = await fetch(apiBase() + "/api/rooms/" + encodeURIComponent(code));
+    if (!res.ok) { toast("No shared session with that code"); return; }
+    const state = await res.json();
+    collab.code = state.code;
+    applyServerState(state);
+    setHashRoom(state.code);
+    connectEvents(state.code);
+    renderShare();
+    if (!fromLink) toast("Joined " + state.code);
+  } catch (err) {
+    toast(location.protocol === "file:" ? "Run python3 serve.py and open the address it prints" : "Could not join that session");
+  }
+}
+function leaveRoom(){
+  if (collab.es) collab.es.close();
+  collab.es = null;
+  collab.code = null;
+  collab.rev = 0;
+  collab.people = [];
+  setHashRoom(null);
+  renderShare();
+  toast("Left the session. This browser keeps its own copy.");
+}
+function setHashRoom(code){
+  const parts = location.hash.replace(/^#/, "").split("&").filter(p => p && !p.startsWith("room="));
+  if (code) parts.push("room=" + code);
+  const next = parts.join("&");
+  history.replaceState(null, "", location.pathname + location.search + (next ? "#" + next : ""));
+}
+function bindShare(){
+  const saved = localStorage.getItem(NAME_KEY) || "";
+  if ($("#shareName")) $("#shareName").value = saved;
+  $("#shareBtn").addEventListener("click", e => {
+    e.stopPropagation();
+    if ($("#shareBtn").disabled) return;
+    $("#sharePop").hidden = !$("#sharePop").hidden;
+  });
+  document.addEventListener("click", e => {
+    if (!$("#sharePop") || $("#sharePop").hidden) return;
+    if (e.target.closest("#share")) return;
+    $("#sharePop").hidden = true;
+  });
+  $("#shareName").addEventListener("change", () => {
+    localStorage.setItem(NAME_KEY, $("#shareName").value.trim());
+    if (collab.code) connectEvents(collab.code);
+  });
+  $("#shareStart").addEventListener("click", startRoom);
+  $("#shareJoin").addEventListener("click", () => joinRoom($("#shareCode").value, false));
+  $("#shareCode").addEventListener("keydown", e => {
+    if (e.key === "Enter") { e.preventDefault(); joinRoom($("#shareCode").value, false); }
+  });
+  $("#shareCopy").addEventListener("click", async () => {
+    const url = $("#shareUrl").value;
+    try { await navigator.clipboard.writeText(url); toast("Link copied"); }
+    catch { $("#shareUrl").focus(); $("#shareUrl").select(); toast("Copy the link"); }
+  });
+  $("#shareLeave").addEventListener("click", leaveRoom);
+  renderShare();
+  watchServer();
+}
 function boot(){
+  bindShare();
   buildSchemaSelect();
   const hash = location.hash.replace(/^#/, "");
   const m = hash.match(/(?:^|&)s=([^&]+)/);
@@ -1364,9 +2034,11 @@ function runSelftest(){
     $("#newBand").value = "flow_tail";
     $("#newCreate").click();
     ok("create", !!(BUCKETS.calibration && BUCKETS.calibration.label === "Calibration" && BUCKETS.calibration.band === "flow_tail"));
+    ok("added-card", !!document.querySelector('.gcard.added[data-id="calibration"] .seg button.on'));
     setPage("map");
     const col = document.querySelector('.col[data-bucket="calibration"]');
     ok("new-lane", !!col && /Calibration/.test(col.textContent));
+    ok("added-design", !!(col && col.classList.contains("added") && col.querySelector(".added-mark")));
     ok("renamed-lane", /Field collection/.test(document.querySelector('.col[data-bucket="sampling"]').textContent));
     ok("legend", /Collect/.test($("#legend").textContent));
     assign("nmdc", "Biosample", "calibration", null);
@@ -1379,6 +2051,33 @@ function runSelftest(){
     setPage("map");
     ok("lane-removed", !document.querySelector('.col[data-bucket="calibration"]'));
     ok("renamed-kept", /Field collection/.test(document.querySelector('.col[data-bucket="sampling"]').textContent));
+    groupStore = sanitizeGroupStore({
+      overrides:{sampling:{label:"Field", short:"Collect", desc:DEFAULT_BUCKETS.sampling.desc}},
+      custom:[{id:"roundtrip", label:"Round Trip", short:"RT", desc:'Check, "please"', color:"datagen", band:"meta"}],
+    });
+    persistGroups();
+    setMap("nmdc", "Biosample", "roundtrip", null, "note");
+    const exported = buildExportPayload();
+    const csv = buildCsv();
+    ok("export-shape", exported.grouping_classes.some(c => c.id === "roundtrip") && exported.mappings.some(r => r.source_class === "Biosample" && r.bucket === "roundtrip"));
+    groupStore = {overrides:{}, custom:[]};
+    mappings = {};
+    persistGroups();
+    saveMappings();
+    const jsonResult = applyImportData(JSON.parse(JSON.stringify(exported)));
+    ok("json-groups", BUCKETS.roundtrip && BUCKETS.roundtrip.label === "Round Trip" && BUCKETS.sampling.label === "Field");
+    ok("json-maps", getMap("nmdc", "Biosample") && getMap("nmdc", "Biosample").bucket === "roundtrip" && getMap("nmdc", "Biosample").notes === "note");
+    ok("json-msg", /grouping classes/.test(jsonResult.msg));
+    groupStore = {overrides:{}, custom:[]};
+    mappings = {};
+    persistGroups();
+    saveMappings();
+    applyImportData(csvToImportData(csv));
+    ok("csv-groups", BUCKETS.roundtrip && BUCKETS.roundtrip.desc === 'Check, "please"' && BUCKETS.sampling.short === "Collect");
+    ok("csv-maps", getMap("nmdc", "Biosample") && getMap("nmdc", "Biosample").bucket === "roundtrip");
+    applyImportData(csvToImportData('"source_schema","source_schema_title","source_class","bucket","bucket_label","target_class","notes"\n"nmdc","NMDC","Study","samples","Samples","",""\n'));
+    ok("legacy-keeps-groups", !!BUCKETS.roundtrip && BUCKETS.sampling.short === "Collect");
+    ok("legacy-maps", getMap("nmdc", "Study") && getMap("nmdc", "Study").bucket === "samples" && !getMap("nmdc", "Biosample"));
   } catch (err) {
     ok("threw", false, String(err && err.stack || err));
   } finally {
