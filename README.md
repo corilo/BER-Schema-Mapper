@@ -1,7 +1,7 @@
-# BASALT Schema Mapper
+# BER Schema Mapper
 
-A standalone workshop page for placing classes from other BER LinkML schemas onto
-BASALT’s process abstractions.
+A standalone workshop page for placing classes from BER LinkML schemas onto
+shared process abstractions (the BASALT lanes).
 
 Open [`index.html`](index.html) in any browser (`file://` works). No server, no
 build step, no JavaScript dependencies.

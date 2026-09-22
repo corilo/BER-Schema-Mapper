@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>BASALT Schema — Class Mapper</title>
+<title>BER Schema Mapper</title>
 <style>
   :root {
     --bg:#0b1020; --bg-2:#0e1528; --panel:#111a2e; --panel-2:#152039;
@@ -196,10 +196,10 @@
 <body>
 <div class="app">
   <header>
-    <div class="logo">MAP</div>
+    <div class="logo">BER</div>
     <div style="min-width:0">
-      <h1>Schema Mapper</h1>
-      <div class="sub">Place BRIDGE schema classes onto BASALT process abstractions</div>
+      <h1>BER Schema Mapper</h1>
+      <div class="sub">Place classes from BER schemas onto shared process abstractions</div>
     </div>
     <div class="spacer"></div>
     <div class="progress" id="progress">—</div>
@@ -292,7 +292,7 @@ const BUCKETS = {
 const FLOW = ["sampling","samples","processing","processed"];
 const FLOW_TAIL = ["datagen","dataproc","products"];
 const META = ["site_meta","sample_meta","other"];
-const STORE_KEY = "basalt-schema-mapper-v1";
+const STORE_KEY = "ber-schema-mapper-v1";
 
 const BASALT = (CATALOG.basalt && CATALOG.basalt.classes) || {};
 const SCHEMAS = CATALOG.schemas || {};
@@ -748,14 +748,14 @@ function download(filename, text, type){
 }
 $("#exportJson").addEventListener("click", () => {
   const payload = {version:1, exported_at: new Date().toISOString(), mappings: allMappingRows()};
-  download("basalt-schema-mappings.json", JSON.stringify(payload, null, 2), "application/json");
+  download("ber-schema-mappings.json", JSON.stringify(payload, null, 2), "application/json");
   toast(`Exported ${payload.mappings.length} mappings`);
 });
 $("#exportCsv").addEventListener("click", () => {
   const rows = allMappingRows();
   const cols = ["source_schema","source_schema_title","source_class","bucket","bucket_label","target_class","notes"];
   const lines = [cols.join(",")].concat(rows.map(r => cols.map(c => `"${String(r[c]??"").replace(/"/g,'""')}"`).join(",")));
-  download("basalt-schema-mappings.csv", lines.join("\n"), "text/csv");
+  download("ber-schema-mappings.csv", lines.join("\n"), "text/csv");
   toast(`Exported ${rows.length} mappings`);
 });
 $("#importFile").addEventListener("change", e => {

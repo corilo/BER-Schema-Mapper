@@ -88,7 +88,7 @@ def fetch_dump(key: str) -> dict:
     url = f"{BRIDGE_RAW}/_dump_{key}.json"
     if path.exists() and path.stat().st_size > 100:
         return json.loads(path.read_text())
-    req = urllib.request.Request(url, headers={"User-Agent": "BASALT-schema-mapper/1.0"})
+    req = urllib.request.Request(url, headers={"User-Agent": "BER-schema-mapper/1.0"})
     with urllib.request.urlopen(req, timeout=45) as resp:
         data = resp.read()
     path.write_bytes(data)
